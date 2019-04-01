@@ -10,12 +10,12 @@ error Sinatra::NotFound do
 end
 
 post '/truth' do
-  # Get params
+  #get the params
   truth_symbol = params['truth_symbol'].to_s
   false_symbol = params['false_symbol'].to_s
   size = params['size'].to_s
 
-  # Check for default values
+  #check the default values
   if truth_symbol == ""
     truth_symbol = "T"
   end
@@ -28,7 +28,7 @@ post '/truth' do
   size = size.to_i
   @size = size
 
-  # Create tables
+  #create tables
   @table = Hash.new
   @table[truth_symbol] = true
   @table[false_symbol] = false
@@ -59,15 +59,6 @@ def display_t_f
   symbols.repeated_permutation(@size).to_a
 end
 
-def comp_and(row)
-  to_ret = true
-  row.each do |val|
-    puts val
-    to_ret &= @table[val]
-  end
-  @reverse_table[to_ret]
-end
-
 def comp_or(row)
   to_ret = false
   row.each do |val|
@@ -84,4 +75,13 @@ def comp_xor(row)
     end
   end
   @reverse_table[count.odd?]
+end
+
+def comp_and(row)
+  to_ret = true
+  row.each do |val|
+    puts val
+    to_ret &= @table[val]
+  end
+  @reverse_table[to_ret]
 end
