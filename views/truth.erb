@@ -1,0 +1,38 @@
+<html>
+<body>
+<table>
+  <%# Write column labels 0 to s-1 %>
+  <%s = size-1%>
+  <%while s >= 0%>
+    <th><%=s%></th>
+    <%s = s-1%>
+  <%end%>
+
+  <%# Write column labels for computational logic %>
+  <th>AND</th>
+  <th>OR</th>
+  <th>XOR</th>
+
+  <%# Get truth table value permutations list %>
+  <% values = display_t_f %>
+
+  <%# Display truth table values %>
+  <% row_index = (2**size)-1%>
+  <%while row_index >= 0%>
+    <tr>
+      <% column_index=size-1%>
+      <%while column_index >= 0%>
+        <td><%= values[row_index].to_a[column_index] %></td>
+        <% column_index-=1%>
+      <%end%>
+      <%# Complete computational logic in backend %>
+      <td><%=comp_and(values[row_index].to_a)%></td>
+      <td><%=comp_or(values[row_index].to_a)%></td>
+      <td><%=comp_xor(values[row_index].to_a)%></td>
+    </tr>
+    <% row_index-=1%>
+  <%end%>
+</table>
+<a href='/'>Main Page</a>
+</body>
+</html>
